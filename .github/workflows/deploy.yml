@@ -4,8 +4,9 @@ on:
   push:
     branches: [ main ]
   schedule:
-    - cron: '0 * * * *'
-  workflow_dispatch:
+    - cron: '0 * * * *' # Запуск каждый час (можно изменить)
+  workflow_dispatch: # Позволяет запускать вручную кнопкой
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -23,10 +24,10 @@ jobs:
         with:
           notion_secret: ${{ secrets.NOTION_SECRET }}
           notion_database: ${{ secrets.NOTION_DATABASE_ID }}
-          output_dir: './docs'
+          output_dir: './docs' # Папка, куда сохранятся файлы
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: docs
-          branch: gh-pages
+          folder: docs # Публикуем содержимое папки docs
+          branch: gh-pages # Ветка для хостинга
